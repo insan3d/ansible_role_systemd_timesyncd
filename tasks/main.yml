@@ -1,0 +1,30 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/tasks.json
+
+- name: Configure systemd-timesyncd
+  become: true
+  block:
+    - name: Ensure timezone set
+      community.general.timezone:
+        name: "{{ systemd_timesyncd_timezone }}"
+
+    - name: Ensure alternative clients absent
+      with_items: ["chrony", "ntp"]
+
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: absent
+
+    - name: Ensure systemd-timesyncd present
+      ansible.builtin.apt:
+        name: systemd-timesyncd
+        state: present
+
+    - name: Ensure systemd-timesyncd configuration present
+      notify: Ensure timesyncd started
+      ansible.builtin.template:
+        src: timesyncd.conf.j2
+        dest: /etc/systemd/timesyncd.conf
+        owner: root
+        group: root
+        mode: "0644"

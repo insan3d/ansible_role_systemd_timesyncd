@@ -1,0 +1,9 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/tasks.json
+
+- name: Ensure timesyncd started
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-timesyncd.service
+    enabled: true
+    state: restarted
