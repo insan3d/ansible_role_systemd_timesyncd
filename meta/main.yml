@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/meta.json
+dependencies: []
+
+galaxy_info:
+  role_name: systemd_timesyncd
+  author: insan3d
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: "2.16"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+
+  description: >-
+    Ensures systemd_timesyncd NTP client is installed and configured. Will uninstall alternative
+    clients (chrony and ntp). Intended to be used on Debian-based distros only since timesyncd
+    package names differ across Linux distributions.

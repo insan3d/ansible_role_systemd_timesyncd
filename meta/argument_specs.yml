@@ -3,13 +3,6 @@
 
 argument_specs:
   main:
-    short_description: Configures systemd_timesyncd daemon
-    description: >-
-      Ensures systemd_timesyncd NTP client is installed and configured. Will uninstall alternative
-      clients (chrony and ntp). Intended to be used on Debian-based distros only since timesyncd
-      package names differ across Linux distributions.
-
-    author: Alexander Pozlevich
     options:
       systemd_timesyncd_timezone:
         description: Timezone to setup
