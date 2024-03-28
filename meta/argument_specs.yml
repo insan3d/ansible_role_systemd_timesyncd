@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/role-arg-spec.json
+
+argument_specs:
+  main:
+    short_description: Configures systemd_timesyncd daemon
+    description: >-
+      Ensures systemd_timesyncd NTP client is installed and configured. Will uninstall alternative
+      clients (chrony and ntp). Intended to be used on Debian-based distros only since timesyncd
+      package names differ across Linux distributions.
+
+    author: Alexander Pozlevich
+    options:
+      systemd_timesyncd_timezone:
+        description: Timezone to setup
+        type: str
+        default: Europe/Moscow
+
+      systemd_timesyncd_ntp_servers:
+        description: Primary NTP servers list
+        type: list
+        elements: str
+
+      systemd_timesyncd_ntp_servers_fallback:
+        description: Fallback NTP servers list
+        type: list
+        elements: str
